@@ -6,10 +6,10 @@
 
    
 	<permission
-	    android:name="info.androidhive.slidingmenu.googlemapsv2.permission.MAPS_RECEIVE"
+	    android:name=".googlemapsv2.permission.MAPS_RECEIVE"
         android:protectionLevel="signature" />
  
-    <uses-permission android:name="info.androidhive.slidingmenu.googlemapsv2.permission.MAPS_RECEIVE" />
+    <uses-permission android:name=".googlemapsv2.permission.MAPS_RECEIVE" />
  
     <uses-sdk
         android:minSdkVersion="11"

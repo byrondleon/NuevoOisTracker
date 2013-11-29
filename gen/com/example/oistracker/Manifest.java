@@ -9,6 +9,6 @@ package com.example.oistracker;
 
 public final class Manifest {
     public static final class permission {
-        public static final String MAPS_RECEIVE="info.androidhive.slidingmenu.googlemapsv2.permission.MAPS_RECEIVE";
+        public static final String MAPS_RECEIVE=".googlemapsv2.permission.MAPS_RECEIVE";
     }
 }

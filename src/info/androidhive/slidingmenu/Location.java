@@ -1,42 +1,57 @@
 package info.androidhive.slidingmenu;
-
-
-import com.example.oistracker.R;
-import com.google.android.gms.maps.CameraUpdateFactory;
-import com.google.android.gms.maps.GoogleMap;
-import com.google.android.gms.maps.MapFragment;
-import com.google.android.gms.maps.SupportMapFragment;
-
-import android.app.Fragment;
+ 
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
-import android.view.InflateException;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
+import com.example.oistracker.R;
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.SupportMapFragment;
+ 
 public class Location extends Fragment {
+  
+	public Location(){}
 
-	private GoogleMap mapa;
-	 public View onCreateView(LayoutInflater inflater, ViewGroup container,
-             Bundle savedInstanceState) {
+	  private GoogleMap mapa;
+	  View view;
 
-		 super.onCreateView(inflater, container, savedInstanceState);
-		    View view = inflater.inflate(R.layout.mapa, container, false);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState)
+    { 
+    	try{
+    		
+    		view = inflater.inflate(R.layout.mapa, container, false);
+            Log.w("IN OnCreate","onCreate Erro View Inflate");
+    		
+    	}catch(Exception e){
+            Log.w("A ocurrido un error", "error en aplicacion"); 
+            Intent g= new Intent(getActivity().getApplicationContext(), Mapa.class);    
+            startActivity(g); 
+    	} 
+    	
+        Log.w("SUPPORT"," FRAGMENT ERROR");
+ 	    mapa = ((SupportMapFragment) getActivity().getSupportFragmentManager().findFragmentById(R.id.map)).getMap();
+    	
+ 	    return view;
+    }
+    
+    
+    
+    public void onDestroyView() {
+	   super.onDestroyView(); 
+       Log.w("En DESTROY", "IN DESTROYVIEW"); 
 
-		    mapa = ((MapFragment) getFragmentManager().findFragmentById(
-	                 R.id.map)).getMap();
-            setupGmap();
-		    return view;
-	 
-	     }
-	private void setupGmap() {
-		// TODO Auto-generated method stub
-	     mapa.setMapType(GoogleMap.MAP_TYPE_SATELLITE);
-
+	   Fragment fragment = (getFragmentManager().findFragmentById(R.id.map));   
+	   FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
+	   ft.remove(fragment);
+	   ft.commit(); 
 	}
-	    	    
-	    	     
-
-	
-
+  
 }
